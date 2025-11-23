@@ -1,3 +1,5 @@
+/* ---------- БАЗОВЫЕ СБРОСЫ ---------- */
+
 *,
 *::before,
 *::after {
@@ -8,9 +10,13 @@ html {
   block-size: 100%;
 }
 
+body {
+  margin: 0;
+  min-block-size: 100%;
+}
+
 .page {
   inline-size: 1200px;
-  block-size: 100%;
   min-block-size: 100vh;
   margin: auto;
   color: #fff;
@@ -42,20 +48,20 @@ ol {
   list-style: none;
 }
 
-/* Кастомный скроллбар */
+/* Кастомный скроллбар (для контейнера с классом custom-scrollbar) */
 .custom-scrollbar::-webkit-scrollbar {
   width: 4px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-track {
-  background: rgb(217 217 217 / 10%);
+  background: rgb(217 217 217 / 0.1);
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
   background-color: #d9d9d9;
 }
 
-/* ---------- Скрытый текст для доступности ---------- */
+/* ---------- ВИЗУАЛЬНО СКРЫТЫЙ ТЕКСТ ---------- */
 
 .visually-hidden {
   position: absolute;
@@ -67,7 +73,7 @@ ol {
   white-space: nowrap;
 }
 
-/* ---------- Основной лейаут ---------- */
+/* ---------- ОСНОВНОЙ ЛЕЙАУТ ---------- */
 
 .content {
   inline-size: 1140px;
@@ -95,10 +101,10 @@ ol {
   row-gap: 26px;
 }
 
-/* ---------- Видео-секция ---------- */
+/* ---------- БЛОК С ВИДЕО ---------- */
 
 .result__video-container {
-  position: relative;
+  position: relative; /* для прелоадера и блока ошибки */
   inline-size: 100%;
   block-size: 386px;
   margin-block-end: 16px;
@@ -112,7 +118,7 @@ ol {
   object-fit: cover;
 }
 
-/* ---------- Заголовок справа ---------- */
+/* ---------- ЗАГОЛОВОК СПРАВА ---------- */
 
 .title {
   font-family: Oswald, sans-serif;
@@ -125,10 +131,10 @@ ol {
   color: #545050;
 }
 
-/* ---------- Блок со списком карточек ---------- */
+/* ---------- СПИСОК КАРТОЧЕК ---------- */
 
 .content__list-container {
-  position: relative;
+  position: relative;      /* для прелоадера */
   block-size: 298px;
   overflow-y: auto;
 }
@@ -140,10 +146,10 @@ ol {
 }
 
 .content__list-item {
-  padding-inline: 3px; /* чтобы обводка/фон карточки не прилипали к краю */
+  padding-inline: 3px;     /* чтобы обводка карточки не прилипала к краю */
 }
 
-/* ---------- Карточки видео ---------- */
+/* ---------- КАРТОЧКИ ВИДЕО ---------- */
 
 .content__card-link {
   display: block;
@@ -195,7 +201,7 @@ ol {
   object-position: center;
 }
 
-/* ---------- Тексты в карточке ---------- */
+/* ---------- ТЕКСТЫ В КАРТОЧКЕ ---------- */
 
 .content__video-card-title {
   font-family: Oswald, sans-serif;
@@ -204,19 +210,20 @@ ol {
   text-transform: uppercase;
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
+  text-overflow: ellipsis; /* обрезка с "..." */
 }
 
 .content__video-card-description {
   font-size: 16px;
   line-height: 1.125;
+
   display: -webkit-box;
-  -webkit-line-clamp: 3; /* кол-во строк до обрезки */
+  -webkit-line-clamp: 4;      /* обрезаем после 4 строк */
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
-/* ---------- Форма поиска ---------- */
+/* ---------- ФОРМА ПОИСКА ---------- */
 
 .search-form {
   display: flex;
@@ -236,7 +243,7 @@ ol {
   margin-block-end: 5px;
 }
 
-/* Лейблы */
+/* Лейблы для инпута и чекбоксов */
 
 .search-form__label {
   display: flex;
@@ -260,7 +267,7 @@ ol {
   text-decoration: underline;
 }
 
-/* Текстовое поле ввода */
+/* Текстовое поле */
 
 .search-form__textfield {
   min-inline-size: 225px;
@@ -291,7 +298,7 @@ ol {
 }
 
 .search-form__checkbox {
-  appearance: none;
+  appearance: none; /* на всякий случай */
 }
 
 /* Псевдочекбокс */
@@ -317,7 +324,7 @@ ol {
   opacity: 1;
 }
 
-/* ---------- Кнопки ---------- */
+/* ---------- КНОПКИ ---------- */
 
 .button {
   border: 1px solid #fff;
@@ -346,14 +353,14 @@ ol {
   background-color: #545050;
 }
 
-/* Кнопка Найти */
+/* Кнопка "Найти" */
 
 .search-form__submit-button {
   inline-size: 194px;
   block-size: 34px;
 }
 
-/* Кнопка Показать ещё */
+/* Кнопка "Показать ещё" */
 
 .more-button {
   display: block;
@@ -362,18 +369,6 @@ ol {
   margin-block-start: 16px;
 }
 
-/* ---------- Курсор на кликабельных элементах ---------- */
-
-.result__video {
-  cursor: pointer;
-}
-
-.content__card-link {
-  cursor: pointer;
-}
-
-/* чекбоксы уже получают cursor от .search-form__label */
-/* кнопки — от .button */
-
-/* ---------- Прелоадеры и ошибки ---------- */
-/* (позиционирование уже сделано через position: relative в контейнерах) */
+/* ---------- ДОП. НАСТРОЙКИ КЛИКАБЕЛЬНОСТИ ---------- */
+/* кнопки и ссылки уже имеют cursor: pointer в своих классах */
+/* чекбоксы — через label, на который повешен cursor: pointer */
