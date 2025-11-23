@@ -11,11 +11,16 @@ html {
 .page {
   inline-size: 1200px;
   block-size: 100%;
+  min-block-size: 100vh;
   margin: auto;
   color: #fff;
   font-family: 'Fira Sans Condensed', sans-serif;
   font-size: 18px;
   background-color: #1b1919;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 h1,
@@ -47,5 +52,328 @@ ol {
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background-color: #D9D9D9;
+  background-color: #d9d9d9;
 }
+
+/* ---------- Скрытый текст для доступности ---------- */
+
+.visually-hidden {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ---------- Основной лейаут ---------- */
+
+.content {
+  inline-size: 1140px;
+  margin-inline: auto;
+
+  display: grid;
+  column-gap: 30px;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    "result details"
+    "result details";
+  align-items: end;
+}
+
+.result {
+  grid-area: result;
+}
+
+.content__details {
+  grid-area: details;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  row-gap: 26px;
+}
+
+/* ---------- Видео-секция ---------- */
+
+.result__video-container {
+  position: relative;
+  inline-size: 100%;
+  block-size: 386px;
+  margin-block-end: 16px;
+  overflow: hidden;
+  background-color: #000;
+}
+
+.result__video {
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+
+/* ---------- Заголовок справа ---------- */
+
+.title {
+  font-family: Oswald, sans-serif;
+  font-size: 75px;
+  line-height: 0.9;
+  text-transform: uppercase;
+}
+
+.content__accent {
+  color: #545050;
+}
+
+/* ---------- Блок со списком карточек ---------- */
+
+.content__list-container {
+  position: relative;
+  block-size: 298px;
+  overflow-y: auto;
+}
+
+.content__list {
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px;
+}
+
+.content__list-item {
+  padding-inline: 3px; /* чтобы обводка/фон карточки не прилипали к краю */
+}
+
+/* ---------- Карточки видео ---------- */
+
+.content__card-link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.content__card-link_current {
+  background-color: #545050;
+}
+
+.content__card-link:focus {
+  outline: none;
+}
+
+.content__card-link:focus-visible {
+  outline: 1px solid #fff;
+  outline-offset: 2px;
+}
+
+.content__card-link:hover .content__video-card-title,
+.content__card-link:hover .content__video-card-description {
+  text-decoration: underline;
+}
+
+.content__card-link:active {
+  background-color: #545050;
+}
+
+.content__video-card {
+  display: flex;
+  column-gap: 12px;
+  align-items: flex-start;
+}
+
+.content__video-card-description-container {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  row-gap: 6px;
+}
+
+.content__video-card-thumbnail {
+  inline-size: 194px;
+  block-size: 103px;
+  flex-shrink: 0;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* ---------- Тексты в карточке ---------- */
+
+.content__video-card-title {
+  font-family: Oswald, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.content__video-card-description {
+  font-size: 16px;
+  line-height: 1.125;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* кол-во строк до обрезки */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ---------- Форма поиска ---------- */
+
+.search-form {
+  display: flex;
+  column-gap: 40px;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.search-form__fieldset {
+  border: none;
+}
+
+.search-form__fieldset-title {
+  font-size: 18px;
+  font-weight: 400;
+  text-transform: uppercase;
+  margin-block-end: 5px;
+}
+
+/* Лейблы */
+
+.search-form__label {
+  display: flex;
+  align-items: center;
+  column-gap: 8px;
+  inline-size: fit-content;
+  cursor: pointer;
+}
+
+.search-form__label:has(.search-form__textfield:focus-visible),
+.search-form__label:has(.search-form__checkbox:focus-visible) {
+  outline: 1px solid #fff;
+  outline-offset: 2px;
+}
+
+.search-form__label-text {
+  font-size: 18px;
+}
+
+.search-form__label:hover .search-form__label-text {
+  text-decoration: underline;
+}
+
+/* Текстовое поле ввода */
+
+.search-form__textfield {
+  min-inline-size: 225px;
+  padding-block: 2px;
+  padding-inline: 0;
+  border: none;
+  border-block-start: 1px solid #fff;
+  border-block-end: 1px solid #fff;
+  background-color: transparent;
+  color: #fff;
+  font: inherit;
+  appearance: none;
+}
+
+.search-form__textfield::placeholder {
+  color: rgb(255 255 255 / 0.7);
+}
+
+.search-form__textfield:focus {
+  outline: none;
+}
+
+/* Чекбоксы */
+
+.search-form__checkbox-list {
+  display: flex;
+  column-gap: 16px;
+}
+
+.search-form__checkbox {
+  appearance: none;
+}
+
+/* Псевдочекбокс */
+
+.search-form__pseudo-checkbox {
+  inline-size: 19px;
+  block-size: 19px;
+  border: 1px solid #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-form__pseudo-checkbox::after {
+  content: "";
+  inline-size: 15px;
+  block-size: 15px;
+  background-color: #fff;
+  opacity: 0;
+}
+
+.search-form__checkbox:checked + .search-form__pseudo-checkbox::after {
+  opacity: 1;
+}
+
+/* ---------- Кнопки ---------- */
+
+.button {
+  border: 1px solid #fff;
+  background-color: transparent;
+  color: #fff;
+  font-family: 'Fira Sans Condensed', sans-serif;
+  font-size: 18px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.button:hover {
+  text-decoration: underline;
+}
+
+.button:focus {
+  outline: none;
+}
+
+.button:focus-visible {
+  outline: 1px solid #fff;
+  outline-offset: 2px;
+}
+
+.button:active {
+  background-color: #545050;
+}
+
+/* Кнопка Найти */
+
+.search-form__submit-button {
+  inline-size: 194px;
+  block-size: 34px;
+}
+
+/* Кнопка Показать ещё */
+
+.more-button {
+  display: block;
+  inline-size: 100%;
+  block-size: 34px;
+  margin-block-start: 16px;
+}
+
+/* ---------- Курсор на кликабельных элементах ---------- */
+
+.result__video {
+  cursor: pointer;
+}
+
+.content__card-link {
+  cursor: pointer;
+}
+
+/* чекбоксы уже получают cursor от .search-form__label */
+/* кнопки — от .button */
+
+/* ---------- Прелоадеры и ошибки ---------- */
+/* (позиционирование уже сделано через position: relative в контейнерах) */
